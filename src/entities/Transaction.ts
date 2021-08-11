@@ -7,13 +7,19 @@ export default class Transaction {
   id: number;
 
   @Column()
-  userId: Number;
+  userId: number;
 
   @Column()
-  amount: Number;
+  amount: number;
 
   @Column()
-  type: String;
+  type: string;
+
+  @Column()
+  description: string;
+
+  @Column()
+  date: Date;
 
   @ManyToOne(() => User, (user) => user.transaction)
   user: User;

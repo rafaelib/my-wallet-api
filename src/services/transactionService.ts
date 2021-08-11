@@ -13,7 +13,6 @@ export async function createTransaction(
   const allTransactions = await getRepository(Transaction).find({
     where: { userId },
   });
-  console.log(allTransactions);
 
   return allTransactions;
 }
