@@ -1,13 +1,10 @@
 import { getRepository } from "typeorm";
-
 import User from "../entities/User";
+import NewUser from "../interfaces/NewUser";
+import Signin from "../interfaces/Signin";
+import bcrypt from "bcrypt";
 
-interface newUser {
-  email: string;
-  password: string;
-}
-
-export async function createUser(user: newUser): Promise<boolean> {
+export async function createUser(user: NewUser): Promise<boolean> {
   const repository = getRepository(User);
   const alreadyRegistered = await repository.findOne({
     where: { email: user.email },
@@ -16,5 +13,13 @@ export async function createUser(user: newUser): Promise<boolean> {
 
   await repository.insert(user);
 
+  return true;
+}
+
+export async function signin(data: Signin): Promise<boolean> {
+  const user = await getRepository(User).findOne({
+    where: { email: data.email },
+  });
+  if (!user || !bcrypt.compareSync(data.password, user.password)) return false;
   return true;
 }
