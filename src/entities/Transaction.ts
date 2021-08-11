@@ -12,6 +12,9 @@ export default class Transaction {
   @Column()
   amount: Number;
 
+  @Column()
+  type: String;
+
   @ManyToOne(() => User, (user) => user.transaction)
   user: User;
 }
