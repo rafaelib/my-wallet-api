@@ -2,10 +2,19 @@ import { getRepository } from "typeorm";
 
 import User from "../entities/User";
 
-export async function getUsers() {
-  const users = await getRepository(User).find({
-    select: ["id", "email"],
-  });
+interface newUser {
+  email: string;
+  password: string;
+}
 
-  return users;
+export async function createUser(user: newUser): Promise<boolean> {
+  const repository = getRepository(User);
+  const alreadyRegistered = await repository.findOne({
+    where: { email: user.email },
+  });
+  if (alreadyRegistered) return false;
+
+  await repository.insert(user);
+
+  return true;
 }
