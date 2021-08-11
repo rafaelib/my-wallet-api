@@ -17,20 +17,10 @@ afterAll(async () => {
   await getConnection().close();
 });
 
-describe("GET /users", () => {
-  it("should answer with text \"OK!\" and status 200", async () => {
-    const user = await createUser();
-
-    const response = await supertest(app).get("/users");
-    
-    expect(response.body).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({
-          email: user.email
-        })
-      ])
-    );
-
-    expect(response.status).toBe(200);
+describe("POST /sign-up", () => {
+  it("should return status 201 for valid params", async () => {
+    const newUser = createUser();
+    const result = await supertest(app).post("/sign-up").send(newUser);
+    expect(result.status).toBe(201);
   });
 });

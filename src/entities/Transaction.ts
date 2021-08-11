@@ -7,13 +7,10 @@ export default class Transaction {
   id: number;
 
   @Column()
-  email: string;
-
-  @Column()
-  password: string;
-
-  @Column()
   userId: Number;
+
+  @Column()
+  amount: Number;
 
   @ManyToOne(() => User, (user) => user.transaction)
   user: User;
