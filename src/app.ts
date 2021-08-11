@@ -17,7 +17,8 @@ app.use(express.json());
 app.post("/sign-up", userController.createUser);
 app.post("/sign-in", userController.signin);
 app.post("/sign-out", authHandler, userController.signout);
-app.get("/transactions", authHandler, transactionController.createTransaction);
+app.get("/transactions", authHandler, transactionController.getTransactions);
+app.post("/transactions", authHandler, transactionController.createTransaction);
 
 app.use(errorHandler);
 

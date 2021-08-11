@@ -19,7 +19,7 @@ export default class Transaction {
   description: string;
 
   @Column()
-  date: Date;
+  date: string;
 
   @ManyToOne(() => User, (user) => user.transaction)
   user: User;
