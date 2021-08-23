@@ -1,7 +1,7 @@
 import "./setup";
 import errorHandler from "./middlewares/errorHandler";
 import authHandler from "./middlewares/authHandler";
-import express, { Request, Response, NextFunction } from "express";
+import express from "express";
 import cors from "cors";
 import "reflect-metadata";
 
