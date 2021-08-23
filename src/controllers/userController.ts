@@ -24,7 +24,7 @@ export async function signin(req: Request, res: Response, next: NextFunction) {
   try {
     if (userSchema.validate(req.body).error) return res.sendStatus(400);
     const result = await userService.signin(req.body);
-    if (!result) return res.sendStatus(400);
+    if (!result) return res.sendStatus(401);
     return res.send(result);
   } catch (err) {
     next(err);

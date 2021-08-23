@@ -12,7 +12,9 @@ export default async function authorization(
   const token = authorization.split(" ")[1];
   if (!token) return res.sendStatus(401);
   const user = await getRepository(Session).findOne({ token });
-  if (!user) return res.sendStatus(401);
+  if (!user) {
+    return res.sendStatus(401);
+  }
   res.locals.userId = Number(user.userId);
   next();
 }

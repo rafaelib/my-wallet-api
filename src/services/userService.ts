@@ -18,17 +18,18 @@ export async function createUser(user: NewUser): Promise<boolean> {
   return true;
 }
 
-export async function signin(data: Signin): Promise<string> {
+export async function signin(data: Signin): Promise<object> {
   const user = await getRepository(User).findOne({
     where: { email: data.email },
   });
   if (!user || !bcrypt.compareSync(data.password, user.password)) return null;
+
   const token = uuid();
   await getRepository(Session).insert({
     userId: user.id,
     token,
   });
-  return token;
+  return { token };
 }
 
 export async function signout(userId: Number): Promise<boolean> {
