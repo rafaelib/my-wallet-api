@@ -3,7 +3,6 @@ import { getConnection, getRepository } from "typeorm";
 import app, { init } from "../../src/app";
 import { clearDatabase } from "../utils/database";
 import { createUser, insertNewUser } from "../factories/userFactory";
-import Session from "../../src/entities/Session";
 
 beforeAll(async () => {
   await init();
